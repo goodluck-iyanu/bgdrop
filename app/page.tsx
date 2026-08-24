@@ -7,6 +7,47 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  // Helper to shrink large phone photos down to max 1024px instantly before AI processing
+  const resizeImage = (file: File): Promise<Blob> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const MAX_SIZE = 1024;
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > MAX_SIZE) {
+              height *= MAX_SIZE / width;
+              width = MAX_SIZE;
+            }
+          } else {
+            if (height > MAX_SIZE) {
+              width *= MAX_SIZE / height;
+              height = MAX_SIZE;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error('Image processing failed'));
+          }, 'image/jpeg', 0.9);
+        };
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -16,6 +57,9 @@ export default function Home() {
     setLoading(true);
 
     try {
+      // 1. Instantly shrink the image so the AI has 10x fewer pixels to process
+      const optimizedBlob = await resizeImage(file);
+
       // @ts-ignore
       const imgly = await import("@imgly/background-removal");
       const removeBackground = imgly.default || imgly.removeBackground || imgly;
@@ -24,8 +68,8 @@ export default function Home() {
         throw new Error("Background removal module failed to load.");
       }
 
-      // Optimized for speed: using the smallest quantized model and GPU acceleration
-      const blob = await removeBackground(file, {
+      // 2. Run lightning-fast background removal on the optimized image
+      const blob = await removeBackground(optimizedBlob, {
         model: "isnet_quint8",
         device: "gpu",
       });
@@ -87,7 +131,7 @@ export default function Home() {
               <div style={{ padding: '40px', textAlign: 'center' }}>
                 <div style={{ width: '36px', height: '36px', border: '4px solid rgba(200,0,26,0.2)', borderRadius: '50%', borderTopColor: '#C8001A', animation: 'spin 1s ease-in-out infinite', margin: '0 auto 16px' }} />
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '20px', color: '#FFFFFF', marginBottom: '8px' }}>Removing Background...</h3>
-                <p style={{ color: '#888888', fontSize: '14px' }}>Processing image locally via browser engine...</p>
+                <p style={{ color: '#888888', fontSize: '14px' }}>Blazing fast local AI processing in progress...</p>
               </div>
             )}
 
