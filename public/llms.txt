@@ -1,0 +1,10 @@
+# DropBG
+
+> Free AI Image Background Remover built by Hoberg Tools and powered by Hoberg Digital Agency.
+
+DropBG is a web-based utility application that lets users instantly remove image backgrounds directly inside their web browser using local client-side AI processing. It requires no server upload, ensuring total user privacy and instant downloads.
+
+## Links
+- Website: https://dropbg.hoberg.com.ng
+- Hoberg Digital Agency: https://hoberg.com.ng
+- TikDrop Tool: https://tikdrop.hoberg.com.ng
