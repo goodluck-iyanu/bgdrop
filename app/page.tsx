@@ -157,7 +157,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignIems: 'center', gap: '8px', textAlign: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textAlign: 'center' }}>
             <p style={{ color: '#888888', fontSize: '13px' }}>&copy; 2026 DropBG. Powered by Hoberg Digital Agency.</p>
             <p style={{ color: '#000000', fontSize: '13px', fontWeight: 700 }}>Secure Local Browser Processing</p>
           </div>
