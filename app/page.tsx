@@ -24,7 +24,11 @@ export default function Home() {
         throw new Error("Background removal module failed to load.");
       }
 
-      const blob = await removeBackground(file);
+      // Optimized for speed: using the smallest quantized model and GPU acceleration
+      const blob = await removeBackground(file, {
+        model: "isnet_quint8",
+        device: "gpu",
+      });
 
       setResultImage(URL.createObjectURL(blob));
     } catch (err: any) {
@@ -83,7 +87,7 @@ export default function Home() {
               <div style={{ padding: '40px', textAlign: 'center' }}>
                 <div style={{ width: '36px', height: '36px', border: '4px solid rgba(200,0,26,0.2)', borderRadius: '50%', borderTopColor: '#C8001A', animation: 'spin 1s ease-in-out infinite', margin: '0 auto 16px' }} />
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '20px', color: '#FFFFFF', marginBottom: '8px' }}>Removing Background...</h3>
-                <p style={{ color: '#888888', fontSize: '14px' }}>Downloading AI weights & processing image. (Takes 10-15s on first load)</p>
+                <p style={{ color: '#888888', fontSize: '14px' }}>Processing image locally via browser engine...</p>
               </div>
             )}
 
@@ -167,11 +171,11 @@ export default function Home() {
       <style jsx global>{`
         html, body {
           overflow-x: hidden;
-          scrollbar-width: none; /* Firefox */
-          -ms-overflow-style: none; /* IE/Edge */
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
         html::-webkit-scrollbar, body::-webkit-scrollbar {
-          display: none; /* Chrome/Safari/Opera */
+          display: none;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
