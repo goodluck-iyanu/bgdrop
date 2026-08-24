@@ -57,7 +57,7 @@ export default function Home() {
     setLoading(true);
 
     try {
-      // 1. Instantly shrink the image so the AI has 10x fewer pixels to process
+      // 1. Instantly shrink the image so the AI has fewer pixels to process
       const optimizedBlob = await resizeImage(file);
 
       // @ts-ignore
@@ -94,7 +94,7 @@ export default function Home() {
       <nav style={{ backgroundColor: '#000000', color: '#FFFFFF', padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <a href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', fontWeight: 700, textDecoration: 'none', color: '#FFFFFF' }}>
-            Drop<span style={{ color: '#C8001A' }}>BG</span>
+            BG <span style={{ color: '#C8001A' }}>Drop</span>
           </a>
           <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
             <a href="https://hoberg.com.ng/tools/" style={{ fontSize: '15px', fontWeight: 500, color: '#FFFFFF', textDecoration: 'none' }}>All Tools</a>
@@ -113,8 +113,8 @@ export default function Home() {
               <span>Built by <a href="https://hoberg.com.ng/tools/" style={{ fontWeight: 700, color: '#FFFFFF', textDecoration: 'underline' }}>Hoberg Tools</a>. Powered by <a href="https://hoberg.com.ng/" style={{ fontWeight: 700, color: '#FFFFFF', textDecoration: 'underline' }}>Hoberg Digital</a>.</span>
             </div>
             
-            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5vw, 56px)', marginBottom: '16px', fontWeight: 700 }}>Remove Image Backgrounds</h1>
-            <p style={{ color: '#888888', fontSize: '18px', maxWidth: '650px', margin: '0 auto 40px' }}>Upload any image to strip the background instantly and completely free. Processed securely in your browser.</p>
+            <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 'clamp(36px, 5vw, 56px)', marginBottom: '16px', fontWeight: 700 }}>BG Remover & Background Drop</h1>
+            <p style={{ color: '#888888', fontSize: '18px', maxWidth: '650px', margin: '0 auto 40px' }}>Upload any image to strip the background instantly and completely free. Super fast browser processing.</p>
             
             {/* Upload Box Container */}
             {!resultImage && !loading && (
@@ -152,7 +152,7 @@ export default function Home() {
                   <button onClick={handleReset} style={{ background: 'transparent', border: '2px solid #000000', color: '#000000', padding: '16px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', textAlign: 'center' }}>
                     Upload Another
                   </button>
-                  <a href={resultImage} download="dropbg-transparent.png" style={{ background: '#C8001A', color: '#FFFFFF', border: 'none', padding: '16px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none' }}>
+                  <a href={resultImage} download="bgdrop-transparent.png" style={{ background: '#C8001A', color: '#FFFFFF', border: 'none', padding: '16px', borderRadius: '6px', fontWeight: 700, cursor: 'pointer', textAlign: 'center', textDecoration: 'none' }}>
                     Download (No Background)
                   </a>
                 </div>
@@ -199,14 +199,14 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '48px', borderBottom: '1px solid #E0E0E0', paddingBottom: '48px', marginBottom: '32px' }}>
             <div>
               <a href="/" style={{ fontFamily: "'Playfair Display', serif", fontSize: '24px', fontWeight: 700, textDecoration: 'none', color: '#000000', display: 'block', marginBottom: '16px' }}>
-                Drop<span style={{ color: '#C8001A' }}>BG</span>
+                BG <span style={{ color: '#C8001A' }}>Drop</span>
               </a>
-              <p style={{ color: '#888888', fontSize: '15px', maxWidth: '350px' }}>DropBG is a free utility platform built, maintained, and secured by Hoberg Digital Agency, operating under the Hoberg Tools ecosystem.</p>
+              <p style={{ color: '#888888', fontSize: '15px', maxWidth: '350px' }}>BG Drop is a free utility platform built, maintained, and secured by Hoberg Digital Agency, operating under the Hoberg Tools ecosystem.</p>
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', textAlign: 'center' }}>
-            <p style={{ color: '#888888', fontSize: '13px' }}>&copy; 2026 DropBG. Powered by Hoberg Digital Agency.</p>
+            <p style={{ color: '#888888', fontSize: '13px' }}>&copy; 2026 BG Drop. Powered by Hoberg Digital Agency.</p>
             <p style={{ color: '#000000', fontSize: '13px', fontWeight: 700 }}>Secure Local Browser Processing</p>
           </div>
         </div>
